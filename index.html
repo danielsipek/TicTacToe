@@ -1,1059 +1,1020 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="#" type="image/x-icon">
-	
-    <style>
-        table {
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="#" type="image/x-icon">
+      <style>
+         table {
             z-index: 1;
             position: relative;
             border-collapse: collapse;
             margin-top: -394px;
             margin-left: 25px;
-        }
+         }
 
-        table,
-        th,
-        td {
+         table,
+         th,
+         td {
             border: 1px solid black;
-        }
+         }
 
-        th,
-        td {
+         th,
+         td {
             width: 35px;
             height: 35px;
             text-align: center;
             font-size: 25px;
-        }
+         }
 
-        td {
+         td {
             cursor: pointer;
-        }
+         }
 
-        .highlight {
+         .highlight {
             background-color: yellow;
-        }
+         }
 
-        .green-highlight {
+         .green-highlight {
             background-color: #2BE02C;
-        }
+         }
 
-        #winner {
+         #winner {
             font-size: 24px;
             margin-top: 10px;
-        }
+         }
 
-        .red {
+         .red {
             color: red;
-        }
+         }
 
-        .blue {
+         .blue {
             color: blue;
-        }
+         }
 
-        .container {
+         .container {
             margin-top: -25px;
             margin-left: 0px;
             display: flex;
-        }
+         }
 
-        .notation {
+         .notation {
             font-size: 26px;
             flex-direction: column;
             margin-right: 10px;
             /* Adjust as needed for spacing */
-        }
+         }
 
-        .notation2 {
+         .notation2 {
             padding-left: 33px;
             padding-top: -50px;
             display: flex;
             justify-content: space-between;
-        }
+         }
 
-        .notation2>div {
+         .notation2>div {
             margin-right: 22px;
-        }
+         }
 
-        .notation div {
+         .notation div {
             margin-bottom: 9px;
             /* Adjust as needed for spacing */
-        }
+         }
 
-        .notation_letters {
+         .notation_letters {
             margin-top: 5px;
             /* Adjust as needed */
-        }
+         }
 
-        .move_log {
+         .move_log {
             float: left;
             /* Change from right to left */
             margin-top: -305px;
             /* Adjust as needed */
             margin-left: 250px;
             /* Adjust as needed to move it more left */
-        }
-		button {
-			cursor: pointer;
-		}
-		button:disabled {
+         }
+
+         button {
+            cursor: pointer;
+         }
+
+         button:disabled {
             cursor: not-allowed;
-        }
-		hr {
-      width: 400px; /* You can adjust the percentage to your preference */
-      margin: 0; /* Remove any default margin */
-      /*border: none;  Remove the default border */
-      /*border-top: 1px solid black;  Add a solid black border on the top */
-    }
-    </style>
-</head>
+         }
 
-<body>
-
-    <h1>TicTacToe<span id="winner"></span></h1>
-    <br>
-    
-    <!-- 3x3 Board -->
-<div id="board3x3" class="board-container" style="display: none;">
-    <div class="container">
-        <div class="notation">
-            <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3</div>
-            <div class="notation_letters">
-                <div>A</div>
-                <div>B</div>
-                <div>C</div>
-            </div>
-        </div>
-    </div>
-    <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -125px; margin-left: 25px;">
-        <tbody>
-            <!-- Each cell is a square in the Tic Tac Toe grid -->
-            <tr>
-                <td data-row="0" data-col="0"></td>
-                <td data-row="0" data-col="1"></td>
-                <td data-row="0" data-col="2"></td>
-            </tr>
-            <tr>
-                <td data-row="1" data-col="0"></td>
-                <td data-row="1" data-col="1"></td>
-                <td data-row="1" data-col="2"></td>
-            </tr>
-            <tr>
-                <td data-row="2" data-col="0"></td>
-                <td data-row="2" data-col="1"></td>
-                <td data-row="2" data-col="2"></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div id="board4x4" class="board-container" style="display: none;">
-    <div class="container">
-        <div class="notation">
-            <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4</div>
-            <div class="notation_letters">
-                <div>A</div>
-                <div>B</div>
-                <div>C</div>
-                <div>D</div>
-            </div>
-        </div>
-    </div>
-    <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -160px; margin-left: 25px;">
-        <tbody>
-            <tr>
-                <td data-row="0" data-col="0"></td>
-                <td data-row="0" data-col="1"></td>
-                <td data-row="0" data-col="2"></td>
-                <td data-row="0" data-col="3"></td>
-            </tr>
-            <tr>
-                <td data-row="1" data-col="0"></td>
-                <td data-row="1" data-col="1"></td>
-                <td data-row="1" data-col="2"></td>
-                <td data-row="1" data-col="3"></td>
-            </tr>
-            <tr>
-                <td data-row="2" data-col="0"></td>
-                <td data-row="2" data-col="1"></td>
-                <td data-row="2" data-col="2"></td>
-                <td data-row="2" data-col="3"></td>
-            </tr>
-            <tr>
-                <td data-row="3" data-col="0"></td>
-                <td data-row="3" data-col="1"></td>
-                <td data-row="3" data-col="2"></td>
-                <td data-row="3" data-col="3"></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-    <div id="board5x5" class="board-container" style="display: none;">
-		<div class="container">
-			<div class="notation">
-				<div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5</div>
-				<div class="notation_letters">
-					<div>A</div>
-					<div>B</div>
-					<div>C</div>
-					<div>D</div>
-					<div>E</div>
-				</div>
-			</div>
-		</div>
-        <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -200px; margin-left: 25px;">
-			<tbody>
-			  <!-- Each cell is a square in the Tic Tac Toe grid -->
-			  <tr>
-				<td data-row="0" data-col="0"></td>
-				<td data-row="0" data-col="1"></td>
-				<td data-row="0" data-col="2"></td>
-				<td data-row="0" data-col="3"></td>
-				<td data-row="0" data-col="4"></td>
-			  </tr>
-			  <tr>
-				<td data-row="1" data-col="0"></td>
-				<td data-row="1" data-col="1"></td>
-				<td data-row="1" data-col="2"></td>
-				<td data-row="1" data-col="3"></td>
-				<td data-row="1" data-col="4"></td>
-			  </tr>
-			  <tr>
-				<td data-row="2" data-col="0"></td>
-				<td data-row="2" data-col="1"></td>
-				<td data-row="2" data-col="2"></td>
-				<td data-row="2" data-col="3"></td>
-				<td data-row="2" data-col="4"></td>
-			  </tr>
-			  <tr>
-				<td data-row="3" data-col="0"></td>
-				<td data-row="3" data-col="1"></td>
-				<td data-row="3" data-col="2"></td>
-				<td data-row="3" data-col="3"></td>
-				<td data-row="3" data-col="4"></td>
-			  </tr>
-			  <tr>
-				<td data-row="4" data-col="0"></td>
-				<td data-row="4" data-col="1"></td>
-				<td data-row="4" data-col="2"></td>
-				<td data-row="4" data-col="3"></td>
-				<td data-row="4" data-col="4"></td>
-			  </tr>
-			</tbody>
-		</table>
-    </div>
-    <div id="board6x6" class="board-container" style="display: none;">
-        <div class="container">
+         hr {
+            width: 400px;
+            /* You can adjust the percentage to your preference */
+            margin: 0;
+            /* Remove any default margin */
+            /*border: none;  Remove the default border */
+            /*border-top: 1px solid black;  Add a solid black border on the top */
+         }
+      </style>
+   </head>
+   <body>
+      <h1>TicTacToe <span id="winner"></span>
+      </h1>
+      <br>
+      <!-- 3x3 Board -->
+      <div id="board3x3" class="board-container" style="display: none;">
+         <div class="container">
             <div class="notation">
-                <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6</div>
-                <div class="notation_letters">
-                    <div>A</div>
-                    <div>B</div>
-                    <div>C</div>
-                    <div>D</div>
-                    <div>E</div>
-                    <div>F</div>
-                </div>
+               <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3</div>
+               <div class="notation_letters">
+                  <div>A</div>
+                  <div>B</div>
+                  <div>C</div>
+               </div>
             </div>
-        </div>
-        <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -235px; margin-left: 25px;">
+         </div>
+         <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -125px; margin-left: 25px;">
             <tbody>
-                <tr>
-                    <td data-row="0" data-col="0"></td>
-                    <td data-row="0" data-col="1"></td>
-                    <td data-row="0" data-col="2"></td>
-                    <td data-row="0" data-col="3"></td>
-                    <td data-row="0" data-col="4"></td>
-                    <td data-row="0" data-col="5"></td>
-                </tr>
-                <tr>
-                    <td data-row="1" data-col="0"></td>
-                    <td data-row="1" data-col="1"></td>
-                    <td data-row="1" data-col="2"></td>
-                    <td data-row="1" data-col="3"></td>
-                    <td data-row="1" data-col="4"></td>
-                    <td data-row="1" data-col="5"></td>
-                </tr>
-                <tr>
-                    <td data-row="2" data-col="0"></td>
-                    <td data-row="2" data-col="1"></td>
-                    <td data-row="2" data-col="2"></td>
-                    <td data-row="2" data-col="3"></td>
-                    <td data-row="2" data-col="4"></td>
-                    <td data-row="2" data-col="5"></td>
-                </tr>
-                <tr>
-                    <td data-row="3" data-col="0"></td>
-                    <td data-row="3" data-col="1"></td>
-                    <td data-row="3" data-col="2"></td>
-                    <td data-row="3" data-col="3"></td>
-                    <td data-row="3" data-col="4"></td>
-                    <td data-row="3" data-col="5"></td>
-                </tr>
-                <tr>
-                    <td data-row="4" data-col="0"></td>
-                    <td data-row="4" data-col="1"></td>
-                    <td data-row="4" data-col="2"></td>
-                    <td data-row="4" data-col="3"></td>
-                    <td data-row="4" data-col="4"></td>
-                    <td data-row="4" data-col="5"></td>
-                </tr>
-                <tr>
-                    <td data-row="5" data-col="0"></td>
-                    <td data-row="5" data-col="1"></td>
-                    <td data-row="5" data-col="2"></td>
-                    <td data-row="5" data-col="3"></td>
-                    <td data-row="5" data-col="4"></td>
-                    <td data-row="5" data-col="5"></td>
-                </tr>
+               <!-- Each cell is a square in the Tic Tac Toe grid -->
+               <tr>
+                  <td data-row="0" data-col="0"></td>
+                  <td data-row="0" data-col="1"></td>
+                  <td data-row="0" data-col="2"></td>
+               </tr>
+               <tr>
+                  <td data-row="1" data-col="0"></td>
+                  <td data-row="1" data-col="1"></td>
+                  <td data-row="1" data-col="2"></td>
+               </tr>
+               <tr>
+                  <td data-row="2" data-col="0"></td>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2"></td>
+               </tr>
             </tbody>
-        </table>
-    </div>
-    <div id="board7x7" class="board-container" style="display: none;">
-        <div class="container">
+         </table>
+      </div>
+      <div id="board4x4" class="board-container" style="display: none;">
+         <div class="container">
             <div class="notation">
-                <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;7</div>
-                <div class="notation_letters">
-                    <div>A</div>
-                    <div>B</div>
-                    <div>C</div>
-                    <div>D</div>
-                    <div>E</div>
-                    <div>F</div>
-                    <div>G</div>
-                </div>
+               <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4</div>
+               <div class="notation_letters">
+                  <div>A</div>
+                  <div>B</div>
+                  <div>C</div>
+                  <div>D</div>
+               </div>
             </div>
-        </div>
-        <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -275px; margin-left: 25px;">
+         </div>
+         <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -160px; margin-left: 25px;">
             <tbody>
-                <tr>
-                    <td data-row="0" data-col="0"></td>
-                    <td data-row="0" data-col="1"></td>
-                    <td data-row="0" data-col="2"></td>
-                    <td data-row="0" data-col="3"></td>
-                    <td data-row="0" data-col="4"></td>
-                    <td data-row="0" data-col="5"></td>
-                    <td data-row="0" data-col="6"></td>
-                </tr>
-                <tr>
-                    <td data-row="1" data-col="0"></td>
-                    <td data-row="1" data-col="1"></td>
-                    <td data-row="1" data-col="2"></td>
-                    <td data-row="1" data-col="3"></td>
-                    <td data-row="1" data-col="4"></td>
-                    <td data-row="1" data-col="5"></td>
-                    <td data-row="1" data-col="6"></td>
-                </tr>
-                <tr>
-                    <td data-row="2" data-col="0"></td>
-                    <td data-row="2" data-col="1"></td>
-                    <td data-row="2" data-col="2"></td>
-                    <td data-row="2" data-col="3"></td>
-                    <td data-row="2" data-col="4"></td>
-                    <td data-row="2" data-col="5"></td>
-                    <td data-row="2" data-col="6"></td>
-                </tr>
-                <tr>
-                    <td data-row="3" data-col="0"></td>
-                    <td data-row="3" data-col="1"></td>
-                    <td data-row="3" data-col="2"></td>
-                    <td data-row="3" data-col="3"></td>
-                    <td data-row="3" data-col="4"></td>
-                    <td data-row="3" data-col="5"></td>
-                    <td data-row="3" data-col="6"></td>
-                </tr>
-                <tr>
-                    <td data-row="4" data-col="0"></td>
-                    <td data-row="4" data-col="1"></td>
-                    <td data-row="4" data-col="2"></td>
-                    <td data-row="4" data-col="3"></td>
-                    <td data-row="4" data-col="4"></td>
-                    <td data-row="4" data-col="5"></td>
-                    <td data-row="4" data-col="6"></td>
-                </tr>
-                <tr>
-                    <td data-row="5" data-col="0"></td>
-                    <td data-row="5" data-col="1"></td>
-                    <td data-row="5" data-col="2"></td>
-                    <td data-row="5" data-col="3"></td>
-                    <td data-row="5" data-col="4"></td>
-                    <td data-row="5" data-col="5"></td>
-                    <td data-row="5" data-col="6"></td>
-                </tr>
-                <tr>
-                    <td data-row="6" data-col="0"></td>
-                    <td data-row="6" data-col="1"></td>
-                    <td data-row="6" data-col="2"></td>
-                    <td data-row="6" data-col="3"></td>
-                    <td data-row="6" data-col="4"></td>
-                    <td data-row="6" data-col="5"></td>
-                    <td data-row="6" data-col="6"></td>
-                </tr>
+               <tr>
+                  <td data-row="0" data-col="0"></td>
+                  <td data-row="0" data-col="1"></td>
+                  <td data-row="0" data-col="2"></td>
+                  <td data-row="0" data-col="3"></td>
+               </tr>
+               <tr>
+                  <td data-row="1" data-col="0"></td>
+                  <td data-row="1" data-col="1"></td>
+                  <td data-row="1" data-col="2"></td>
+                  <td data-row="1" data-col="3"></td>
+               </tr>
+               <tr>
+                  <td data-row="2" data-col="0"></td>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2"></td>
+                  <td data-row="2" data-col="3"></td>
+               </tr>
+               <tr>
+                  <td data-row="3" data-col="0"></td>
+                  <td data-row="3" data-col="1"></td>
+                  <td data-row="3" data-col="2"></td>
+                  <td data-row="3" data-col="3"></td>
+               </tr>
             </tbody>
-        </table>
-    </div>
-    <div id="board8x8" class="board-container" style="display: none;">
-        <div class="container">
+         </table>
+      </div>
+      <div id="board5x5" class="board-container" style="display: none;">
+         <div class="container">
             <div class="notation">
-                <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;8</div>
-                <div class="notation_letters">
-                    <div>A</div>
-                    <div>B</div>
-                    <div>C</div>
-                    <div>D</div>
-                    <div>E</div>
-                    <div>F</div>
-                    <div>G</div>
-                    <div>H</div>
-                </div>
+               <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5</div>
+               <div class="notation_letters">
+                  <div>A</div>
+                  <div>B</div>
+                  <div>C</div>
+                  <div>D</div>
+                  <div>E</div>
+               </div>
             </div>
-        </div>
-        <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -310px; margin-left: 25px;">
+         </div>
+         <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -200px; margin-left: 25px;">
             <tbody>
-                <tr>
-                    <td data-row="0" data-col="0"></td>
-                    <td data-row="0" data-col="1"></td>
-                    <td data-row="0" data-col="2"></td>
-                    <td data-row="0" data-col="3"></td>
-                    <td data-row="0" data-col="4"></td>
-                    <td data-row="0" data-col="5"></td>
-                    <td data-row="0" data-col="6"></td>
-                    <td data-row="0" data-col="7"></td>
-                </tr>
-                <tr>
-                    <td data-row="1" data-col="0"></td>
-                    <td data-row="1" data-col="1"></td>
-                    <td data-row="1" data-col="2"></td>
-                    <td data-row="1" data-col="3"></td>
-                    <td data-row="1" data-col="4"></td>
-                    <td data-row="1" data-col="5"></td>
-                    <td data-row="1" data-col="6"></td>
-                    <td data-row="1" data-col="7"></td>
-                </tr>
-                <tr>
-                    <td data-row="2" data-col="0"></td>
-                    <td data-row="2" data-col="1"></td>
-                    <td data-row="2" data-col="2"></td>
-                    <td data-row="2" data-col="3"></td>
-                    <td data-row="2" data-col="4"></td>
-                    <td data-row="2" data-col="5"></td>
-                    <td data-row="2" data-col="6"></td>
-                    <td data-row="2" data-col="7"></td>
-                </tr>
-                <tr>
-                    <td data-row="3" data-col="0"></td>
-                    <td data-row="3" data-col="1"></td>
-                    <td data-row="3" data-col="2"></td>
-                    <td data-row="3" data-col="3"></td>
-                    <td data-row="3" data-col="4"></td>
-                    <td data-row="3" data-col="5"></td>
-                    <td data-row="3" data-col="6"></td>
-                    <td data-row="3" data-col="7"></td>
-                </tr>
-                <tr>
-                    <td data-row="4" data-col="0"></td>
-                    <td data-row="4" data-col="1"></td>
-                    <td data-row="4" data-col="2"></td>
-                    <td data-row="4" data-col="3"></td>
-                    <td data-row="4" data-col="4"></td>
-                    <td data-row="4" data-col="5"></td>
-                    <td data-row="4" data-col="6"></td>
-                    <td data-row="4" data-col="7"></td>
-                </tr>
-                <tr>
-                    <td data-row="5" data-col="0"></td>
-                    <td data-row="5" data-col="1"></td>
-                    <td data-row="5" data-col="2"></td>
-                    <td data-row="5" data-col="3"></td>
-                    <td data-row="5" data-col="4"></td>
-                    <td data-row="5" data-col="5"></td>
-                    <td data-row="5" data-col="6"></td>
-                    <td data-row="5" data-col="7"></td>
-                </tr>
-                <tr>
-                    <td data-row="6" data-col="0"></td>
-                    <td data-row="6" data-col="1"></td>
-                    <td data-row="6" data-col="2"></td>
-                    <td data-row="6" data-col="3"></td>
-                    <td data-row="6" data-col="4"></td>
-                    <td data-row="6" data-col="5"></td>
-                    <td data-row="6" data-col="6"></td>
-                    <td data-row="6" data-col="7"></td>
-                </tr>
-                <tr>
-                    <td data-row="7" data-col="0"></td>
-                    <td data-row="7" data-col="1"></td>
-                    <td data-row="7" data-col="2"></td>
-                    <td data-row="7" data-col="3"></td>
-                    <td data-row="7" data-col="4"></td>
-                    <td data-row="7" data-col="5"></td>
-                    <td data-row="7" data-col="6"></td>
-                    <td data-row="7" data-col="7"></td>
-                </tr>
+               <!-- Each cell is a square in the Tic Tac Toe grid -->
+               <tr>
+                  <td data-row="0" data-col="0"></td>
+                  <td data-row="0" data-col="1"></td>
+                  <td data-row="0" data-col="2"></td>
+                  <td data-row="0" data-col="3"></td>
+                  <td data-row="0" data-col="4"></td>
+               </tr>
+               <tr>
+                  <td data-row="1" data-col="0"></td>
+                  <td data-row="1" data-col="1"></td>
+                  <td data-row="1" data-col="2"></td>
+                  <td data-row="1" data-col="3"></td>
+                  <td data-row="1" data-col="4"></td>
+               </tr>
+               <tr>
+                  <td data-row="2" data-col="0"></td>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2"></td>
+                  <td data-row="2" data-col="3"></td>
+                  <td data-row="2" data-col="4"></td>
+               </tr>
+               <tr>
+                  <td data-row="3" data-col="0"></td>
+                  <td data-row="3" data-col="1"></td>
+                  <td data-row="3" data-col="2"></td>
+                  <td data-row="3" data-col="3"></td>
+                  <td data-row="3" data-col="4"></td>
+               </tr>
+               <tr>
+                  <td data-row="4" data-col="0"></td>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2"></td>
+                  <td data-row="4" data-col="3"></td>
+                  <td data-row="4" data-col="4"></td>
+               </tr>
             </tbody>
-        </table>
-    </div>
-    <div id="board9x9" class="board-container" style="display: none;">
-        <div class="container">
+         </table>
+      </div>
+      <div id="board6x6" class="board-container" style="display: none;">
+         <div class="container">
             <div class="notation">
-                <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;9</div>
-                <div class="notation_letters">
-                    <div>A</div>
-                    <div>B</div>
-                    <div>C</div>
-                    <div>D</div>
-                    <div>E</div>
-                    <div>F</div>
-                    <div>G</div>
-                    <div>H</div>
-                    <div>I</div>
-                </div>
+               <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6</div>
+               <div class="notation_letters">
+                  <div>A</div>
+                  <div>B</div>
+                  <div>C</div>
+                  <div>D</div>
+                  <div>E</div>
+                  <div>F</div>
+               </div>
             </div>
-        </div>
-        <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -350px; margin-left: 25px;">
+         </div>
+         <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -235px; margin-left: 25px;">
             <tbody>
-                <tr>
-                    <td data-row="0" data-col="0"></td>
-                    <td data-row="0" data-col="1"></td>
-                    <td data-row="0" data-col="2"></td>
-                    <td data-row="0" data-col="3"></td>
-                    <td data-row="0" data-col="4"></td>
-                    <td data-row="0" data-col="5"></td>
-                    <td data-row="0" data-col="6"></td>
-                    <td data-row="0" data-col="7"></td>
-                    <td data-row="0" data-col="8"></td>
-                </tr>
-                <tr>
-                    <td data-row="1" data-col="0"></td>
-                    <td data-row="1" data-col="1"></td>
-                    <td data-row="1" data-col="2"></td>
-                    <td data-row="1" data-col="3"></td>
-                    <td data-row="1" data-col="4"></td>
-                    <td data-row="1" data-col="5"></td>
-                    <td data-row="1" data-col="6"></td>
-                    <td data-row="1" data-col="7"></td>
-                    <td data-row="1" data-col="8"></td>
-                </tr>
-                <tr>
-                    <td data-row="2" data-col="0"></td>
-                    <td data-row="2" data-col="1"></td>
-                    <td data-row="2" data-col="2"></td>
-                    <td data-row="2" data-col="3"></td>
-                    <td data-row="2" data-col="4"></td>
-                    <td data-row="2" data-col="5"></td>
-                    <td data-row="2" data-col="6"></td>
-                    <td data-row="2" data-col="7"></td>
-                    <td data-row="2" data-col="8"></td>
-                </tr>
-                <tr>
-                    <td data-row="3" data-col="0"></td>
-                    <td data-row="3" data-col="1"></td>
-                    <td data-row="3" data-col="2"></td>
-                    <td data-row="3" data-col="3"></td>
-                    <td data-row="3" data-col="4"></td>
-                    <td data-row="3" data-col="5"></td>
-                    <td data-row="3" data-col="6"></td>
-                    <td data-row="3" data-col="7"></td>
-                    <td data-row="3" data-col="8"></td>
-                </tr>
-                <tr>
-                    <td data-row="4" data-col="0"></td>
-                    <td data-row="4" data-col="1"></td>
-                    <td data-row="4" data-col="2"></td>
-                    <td data-row="4" data-col="3"></td>
-                    <td data-row="4" data-col="4"></td>
-                    <td data-row="4" data-col="5"></td>
-                    <td data-row="4" data-col="6"></td>
-                    <td data-row="4" data-col="7"></td>
-                    <td data-row="4" data-col="8"></td>
-                </tr>
-                <tr>
-                    <td data-row="5" data-col="0"></td>
-                    <td data-row="5" data-col="1"></td>
-                    <td data-row="5" data-col="2"></td>
-                    <td data-row="5" data-col="3"></td>
-                    <td data-row="5" data-col="4"></td>
-                    <td data-row="5" data-col="5"></td>
-                    <td data-row="5" data-col="6"></td>
-                    <td data-row="5" data-col="7"></td>
-                    <td data-row="5" data-col="8"></td>
-                </tr>
-                <tr>
-                    <td data-row="6" data-col="0"></td>
-                    <td data-row="6" data-col="1"></td>
-                    <td data-row="6" data-col="2"></td>
-                    <td data-row="6" data-col="3"></td>
-                    <td data-row="6" data-col="4"></td>
-                    <td data-row="6" data-col="5"></td>
-                    <td data-row="6" data-col="6"></td>
-                    <td data-row="6" data-col="7"></td>
-                    <td data-row="6" data-col="8"></td>
-                </tr>
-                <tr>
-                    <td data-row="7" data-col="0"></td>
-                    <td data-row="7" data-col="1"></td>
-                    <td data-row="7" data-col="2"></td>
-                    <td data-row="7" data-col="3"></td>
-                    <td data-row="7" data-col="4"></td>
-                    <td data-row="7" data-col="5"></td>
-                    <td data-row="7" data-col="6"></td>
-                    <td data-row="7" data-col="7"></td>
-                    <td data-row="7" data-col="8"></td>
-                </tr>
-                <tr>
-                    <td data-row="8" data-col="0"></td>
-                    <td data-row="8" data-col="1"></td>
-                    <td data-row="8" data-col="2"></td>
-                    <td data-row="8" data-col="3"></td>
-                    <td data-row="8" data-col="4"></td>
-                    <td data-row="8" data-col="5"></td>
-                    <td data-row="8" data-col="6"></td>
-                    <td data-row="8" data-col="7"></td>
-                    <td data-row="8" data-col="8"></td>
-                </tr>
+               <tr>
+                  <td data-row="0" data-col="0"></td>
+                  <td data-row="0" data-col="1"></td>
+                  <td data-row="0" data-col="2"></td>
+                  <td data-row="0" data-col="3"></td>
+                  <td data-row="0" data-col="4"></td>
+                  <td data-row="0" data-col="5"></td>
+               </tr>
+               <tr>
+                  <td data-row="1" data-col="0"></td>
+                  <td data-row="1" data-col="1"></td>
+                  <td data-row="1" data-col="2"></td>
+                  <td data-row="1" data-col="3"></td>
+                  <td data-row="1" data-col="4"></td>
+                  <td data-row="1" data-col="5"></td>
+               </tr>
+               <tr>
+                  <td data-row="2" data-col="0"></td>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2"></td>
+                  <td data-row="2" data-col="3"></td>
+                  <td data-row="2" data-col="4"></td>
+                  <td data-row="2" data-col="5"></td>
+               </tr>
+               <tr>
+                  <td data-row="3" data-col="0"></td>
+                  <td data-row="3" data-col="1"></td>
+                  <td data-row="3" data-col="2"></td>
+                  <td data-row="3" data-col="3"></td>
+                  <td data-row="3" data-col="4"></td>
+                  <td data-row="3" data-col="5"></td>
+               </tr>
+               <tr>
+                  <td data-row="4" data-col="0"></td>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2"></td>
+                  <td data-row="4" data-col="3"></td>
+                  <td data-row="4" data-col="4"></td>
+                  <td data-row="4" data-col="5"></td>
+               </tr>
+               <tr>
+                  <td data-row="5" data-col="0"></td>
+                  <td data-row="5" data-col="1"></td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3"></td>
+                  <td data-row="5" data-col="4"></td>
+                  <td data-row="5" data-col="5"></td>
+               </tr>
             </tbody>
-        </table>
-    </div>  
-	<div id="board10x10" class="board-container">
-		<div class="container">
-			<div class="notation">
-				<div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;10</div>
-				<div class="notation_letters">
-					<div>A</div>
-					<div>B</div>
-					<div>C</div>
-					<div>D</div>
-					<div>E</div>
-					<div>F</div>
-					<div>G</div>
-					<div>H</div>
-					<div>I</div>
-					<div>J</div>
-				</div>
-			</div>
-		</div>
-		<table>
-			<tbody>
-				<!-- 10x10 table rows -->
-				<tr>
-					<td data-row="0" data-col="0"></td>
-					<td data-row="0" data-col="1"></td>
-					<td data-row="0" data-col="2"></td>
-					<td data-row="0" data-col="3"></td>
-					<td data-row="0" data-col="4"></td>
-					<td data-row="0" data-col="5"></td>
-					<td data-row="0" data-col="6"></td>
-					<td data-row="0" data-col="7"></td>
-					<td data-row="0" data-col="8"></td>
-					<td data-row="0" data-col="9"></td>
-				</tr>
-				<tr>
-					<td data-row="1" data-col="0"></td>
-					<td data-row="1" data-col="1"></td>
-					<td data-row="1" data-col="2"></td>
-					<td data-row="1" data-col="3"></td>
-					<td data-row="1" data-col="4"></td>
-					<td data-row="1" data-col="5"></td>
-					<td data-row="1" data-col="6"></td>
-					<td data-row="1" data-col="7"></td>
-					<td data-row="1" data-col="8"></td>
-					<td data-row="1" data-col="9"></td>
-				</tr>
-				<tr>
-					<td data-row="2" data-col="0"></td>
-					<td data-row="2" data-col="1"></td>
-					<td data-row="2" data-col="2"></td>
-					<td data-row="2" data-col="3"></td>
-					<td data-row="2" data-col="4"></td>
-					<td data-row="2" data-col="5"></td>
-					<td data-row="2" data-col="6"></td>
-					<td data-row="2" data-col="7"></td>
-					<td data-row="2" data-col="8"></td>
-					<td data-row="2" data-col="9"></td>
-				</tr>
-				<tr>
-					<td data-row="3" data-col="0"></td>
-					<td data-row="3" data-col="1"></td>
-					<td data-row="3" data-col="2"></td>
-					<td data-row="3" data-col="3"></td>
-					<td data-row="3" data-col="4"></td>
-					<td data-row="3" data-col="5"></td>
-					<td data-row="3" data-col="6"></td>
-					<td data-row="3" data-col="7"></td>
-					<td data-row="3" data-col="8"></td>
-					<td data-row="3" data-col="9"></td>
-				</tr>
-				<tr>
-					<td data-row="4" data-col="0"></td>
-					<td data-row="4" data-col="1"></td>
-					<td data-row="4" data-col="2"></td>
-					<td data-row="4" data-col="3"></td>
-					<td data-row="4" data-col="4"></td>
-					<td data-row="4" data-col="5"></td>
-					<td data-row="4" data-col="6"></td>
-					<td data-row="4" data-col="7"></td>
-					<td data-row="4" data-col="8"></td>
-					<td data-row="4" data-col="9"></td>
-				</tr>
-				<tr>
-					<td data-row="5" data-col="0"></td>
-					<td data-row="5" data-col="1"></td>
-					<td data-row="5" data-col="2"></td>
-					<td data-row="5" data-col="3"></td>
-					<td data-row="5" data-col="4"></td>
-					<td data-row="5" data-col="5"></td>
-					<td data-row="5" data-col="6"></td>
-					<td data-row="5" data-col="7"></td>
-					<td data-row="5" data-col="8"></td>
-					<td data-row="5" data-col="9"></td>
-				</tr>
-				<tr>
-					<td data-row="6" data-col="0"></td>
-					<td data-row="6" data-col="1"></td>
-					<td data-row="6" data-col="2"></td>
-					<td data-row="6" data-col="3"></td>
-					<td data-row="6" data-col="4"></td>
-					<td data-row="6" data-col="5"></td>
-					<td data-row="6" data-col="6"></td>
-					<td data-row="6" data-col="7"></td>
-					<td data-row="6" data-col="8"></td>
-					<td data-row="6" data-col="9"></td>
-				</tr>
-				<tr>
-					<td data-row="7" data-col="0"></td>
-					<td data-row="7" data-col="1"></td>
-					<td data-row="7" data-col="2"></td>
-					<td data-row="7" data-col="3"></td>
-					<td data-row="7" data-col="4"></td>
-					<td data-row="7" data-col="5"></td>
-					<td data-row="7" data-col="6"></td>
-					<td data-row="7" data-col="7"></td>
-					<td data-row="7" data-col="8"></td>
-					<td data-row="7" data-col="9"></td>
-				</tr>
-				<tr>
-					<td data-row="8" data-col="0"></td>
-					<td data-row="8" data-col="1"></td>
-					<td data-row="8" data-col="2"></td>
-					<td data-row="8" data-col="3"></td>
-					<td data-row="8" data-col="4"></td>
-					<td data-row="8" data-col="5"></td>
-					<td data-row="8" data-col="6"></td>
-					<td data-row="8" data-col="7"></td>
-					<td data-row="8" data-col="8"></td>
-					<td data-row="8" data-col="9"></td>
-				</tr>
-				<tr>
-					<td data-row="9" data-col="0"></td>
-					<td data-row="9" data-col="1"></td>
-					<td data-row="9" data-col="2"></td>
-					<td data-row="9" data-col="3"></td>
-					<td data-row="9" data-col="4"></td>
-					<td data-row="9" data-col="5"></td>
-					<td data-row="9" data-col="6"></td>
-					<td data-row="9" data-col="7"></td>
-					<td data-row="9" data-col="8"></td>
-					<td data-row="9" data-col="9"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-    <br>
-	
-    <button onclick="undoMove()" disabled>Undo</button>
-    <button onclick="redoMove()" disabled>Redo</button>
-    <button id="resetButton">Reset</button>
-    <label for="boardSize">Size:</label>
-	<!--<select id="boardSize" onchange="switchBoardSize(this.value)">-->
-    <select id="boardSize">
-        <option value="3">3x3</option>
-        <option value="4">4x4</option>
-        <option value="5">5x5</option>
-        <option value="6">6x6</option>
-        <option value="7">7x7</option>
-        <option value="8">8x8</option>
-        <option value="9">9x9</option>
-        <option value="10" selected>10x10</option>
-    </select>
+         </table>
+      </div>
+      <div id="board7x7" class="board-container" style="display: none;">
+         <div class="container">
+            <div class="notation">
+               <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;7</div>
+               <div class="notation_letters">
+                  <div>A</div>
+                  <div>B</div>
+                  <div>C</div>
+                  <div>D</div>
+                  <div>E</div>
+                  <div>F</div>
+                  <div>G</div>
+               </div>
+            </div>
+         </div>
+         <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -275px; margin-left: 25px;">
+            <tbody>
+               <tr>
+                  <td data-row="0" data-col="0"></td>
+                  <td data-row="0" data-col="1"></td>
+                  <td data-row="0" data-col="2"></td>
+                  <td data-row="0" data-col="3"></td>
+                  <td data-row="0" data-col="4"></td>
+                  <td data-row="0" data-col="5"></td>
+                  <td data-row="0" data-col="6"></td>
+               </tr>
+               <tr>
+                  <td data-row="1" data-col="0"></td>
+                  <td data-row="1" data-col="1"></td>
+                  <td data-row="1" data-col="2"></td>
+                  <td data-row="1" data-col="3"></td>
+                  <td data-row="1" data-col="4"></td>
+                  <td data-row="1" data-col="5"></td>
+                  <td data-row="1" data-col="6"></td>
+               </tr>
+               <tr>
+                  <td data-row="2" data-col="0"></td>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2"></td>
+                  <td data-row="2" data-col="3"></td>
+                  <td data-row="2" data-col="4"></td>
+                  <td data-row="2" data-col="5"></td>
+                  <td data-row="2" data-col="6"></td>
+               </tr>
+               <tr>
+                  <td data-row="3" data-col="0"></td>
+                  <td data-row="3" data-col="1"></td>
+                  <td data-row="3" data-col="2"></td>
+                  <td data-row="3" data-col="3"></td>
+                  <td data-row="3" data-col="4"></td>
+                  <td data-row="3" data-col="5"></td>
+                  <td data-row="3" data-col="6"></td>
+               </tr>
+               <tr>
+                  <td data-row="4" data-col="0"></td>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2"></td>
+                  <td data-row="4" data-col="3"></td>
+                  <td data-row="4" data-col="4"></td>
+                  <td data-row="4" data-col="5"></td>
+                  <td data-row="4" data-col="6"></td>
+               </tr>
+               <tr>
+                  <td data-row="5" data-col="0"></td>
+                  <td data-row="5" data-col="1"></td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3"></td>
+                  <td data-row="5" data-col="4"></td>
+                  <td data-row="5" data-col="5"></td>
+                  <td data-row="5" data-col="6"></td>
+               </tr>
+               <tr>
+                  <td data-row="6" data-col="0"></td>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2"></td>
+                  <td data-row="6" data-col="3"></td>
+                  <td data-row="6" data-col="4"></td>
+                  <td data-row="6" data-col="5"></td>
+                  <td data-row="6" data-col="6"></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <div id="board8x8" class="board-container" style="display: none;">
+         <div class="container">
+            <div class="notation">
+               <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;8</div>
+               <div class="notation_letters">
+                  <div>A</div>
+                  <div>B</div>
+                  <div>C</div>
+                  <div>D</div>
+                  <div>E</div>
+                  <div>F</div>
+                  <div>G</div>
+                  <div>H</div>
+               </div>
+            </div>
+         </div>
+         <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -310px; margin-left: 25px;">
+            <tbody>
+               <tr>
+                  <td data-row="0" data-col="0"></td>
+                  <td data-row="0" data-col="1"></td>
+                  <td data-row="0" data-col="2"></td>
+                  <td data-row="0" data-col="3"></td>
+                  <td data-row="0" data-col="4"></td>
+                  <td data-row="0" data-col="5"></td>
+                  <td data-row="0" data-col="6"></td>
+                  <td data-row="0" data-col="7"></td>
+               </tr>
+               <tr>
+                  <td data-row="1" data-col="0"></td>
+                  <td data-row="1" data-col="1"></td>
+                  <td data-row="1" data-col="2"></td>
+                  <td data-row="1" data-col="3"></td>
+                  <td data-row="1" data-col="4"></td>
+                  <td data-row="1" data-col="5"></td>
+                  <td data-row="1" data-col="6"></td>
+                  <td data-row="1" data-col="7"></td>
+               </tr>
+               <tr>
+                  <td data-row="2" data-col="0"></td>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2"></td>
+                  <td data-row="2" data-col="3"></td>
+                  <td data-row="2" data-col="4"></td>
+                  <td data-row="2" data-col="5"></td>
+                  <td data-row="2" data-col="6"></td>
+                  <td data-row="2" data-col="7"></td>
+               </tr>
+               <tr>
+                  <td data-row="3" data-col="0"></td>
+                  <td data-row="3" data-col="1"></td>
+                  <td data-row="3" data-col="2"></td>
+                  <td data-row="3" data-col="3"></td>
+                  <td data-row="3" data-col="4"></td>
+                  <td data-row="3" data-col="5"></td>
+                  <td data-row="3" data-col="6"></td>
+                  <td data-row="3" data-col="7"></td>
+               </tr>
+               <tr>
+                  <td data-row="4" data-col="0"></td>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2"></td>
+                  <td data-row="4" data-col="3"></td>
+                  <td data-row="4" data-col="4"></td>
+                  <td data-row="4" data-col="5"></td>
+                  <td data-row="4" data-col="6"></td>
+                  <td data-row="4" data-col="7"></td>
+               </tr>
+               <tr>
+                  <td data-row="5" data-col="0"></td>
+                  <td data-row="5" data-col="1"></td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3"></td>
+                  <td data-row="5" data-col="4"></td>
+                  <td data-row="5" data-col="5"></td>
+                  <td data-row="5" data-col="6"></td>
+                  <td data-row="5" data-col="7"></td>
+               </tr>
+               <tr>
+                  <td data-row="6" data-col="0"></td>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2"></td>
+                  <td data-row="6" data-col="3"></td>
+                  <td data-row="6" data-col="4"></td>
+                  <td data-row="6" data-col="5"></td>
+                  <td data-row="6" data-col="6"></td>
+                  <td data-row="6" data-col="7"></td>
+               </tr>
+               <tr>
+                  <td data-row="7" data-col="0"></td>
+                  <td data-row="7" data-col="1"></td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3"></td>
+                  <td data-row="7" data-col="4"></td>
+                  <td data-row="7" data-col="5"></td>
+                  <td data-row="7" data-col="6"></td>
+                  <td data-row="7" data-col="7"></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <div id="board9x9" class="board-container" style="display: none;">
+         <div class="container">
+            <div class="notation">
+               <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;9</div>
+               <div class="notation_letters">
+                  <div>A</div>
+                  <div>B</div>
+                  <div>C</div>
+                  <div>D</div>
+                  <div>E</div>
+                  <div>F</div>
+                  <div>G</div>
+                  <div>H</div>
+                  <div>I</div>
+               </div>
+            </div>
+         </div>
+         <table style="z-index: 1; position: relative; border-collapse: collapse; margin-top: -350px; margin-left: 25px;">
+            <tbody>
+               <tr>
+                  <td data-row="0" data-col="0"></td>
+                  <td data-row="0" data-col="1"></td>
+                  <td data-row="0" data-col="2"></td>
+                  <td data-row="0" data-col="3"></td>
+                  <td data-row="0" data-col="4"></td>
+                  <td data-row="0" data-col="5"></td>
+                  <td data-row="0" data-col="6"></td>
+                  <td data-row="0" data-col="7"></td>
+                  <td data-row="0" data-col="8"></td>
+               </tr>
+               <tr>
+                  <td data-row="1" data-col="0"></td>
+                  <td data-row="1" data-col="1"></td>
+                  <td data-row="1" data-col="2"></td>
+                  <td data-row="1" data-col="3"></td>
+                  <td data-row="1" data-col="4"></td>
+                  <td data-row="1" data-col="5"></td>
+                  <td data-row="1" data-col="6"></td>
+                  <td data-row="1" data-col="7"></td>
+                  <td data-row="1" data-col="8"></td>
+               </tr>
+               <tr>
+                  <td data-row="2" data-col="0"></td>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2"></td>
+                  <td data-row="2" data-col="3"></td>
+                  <td data-row="2" data-col="4"></td>
+                  <td data-row="2" data-col="5"></td>
+                  <td data-row="2" data-col="6"></td>
+                  <td data-row="2" data-col="7"></td>
+                  <td data-row="2" data-col="8"></td>
+               </tr>
+               <tr>
+                  <td data-row="3" data-col="0"></td>
+                  <td data-row="3" data-col="1"></td>
+                  <td data-row="3" data-col="2"></td>
+                  <td data-row="3" data-col="3"></td>
+                  <td data-row="3" data-col="4"></td>
+                  <td data-row="3" data-col="5"></td>
+                  <td data-row="3" data-col="6"></td>
+                  <td data-row="3" data-col="7"></td>
+                  <td data-row="3" data-col="8"></td>
+               </tr>
+               <tr>
+                  <td data-row="4" data-col="0"></td>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2"></td>
+                  <td data-row="4" data-col="3"></td>
+                  <td data-row="4" data-col="4"></td>
+                  <td data-row="4" data-col="5"></td>
+                  <td data-row="4" data-col="6"></td>
+                  <td data-row="4" data-col="7"></td>
+                  <td data-row="4" data-col="8"></td>
+               </tr>
+               <tr>
+                  <td data-row="5" data-col="0"></td>
+                  <td data-row="5" data-col="1"></td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3"></td>
+                  <td data-row="5" data-col="4"></td>
+                  <td data-row="5" data-col="5"></td>
+                  <td data-row="5" data-col="6"></td>
+                  <td data-row="5" data-col="7"></td>
+                  <td data-row="5" data-col="8"></td>
+               </tr>
+               <tr>
+                  <td data-row="6" data-col="0"></td>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2"></td>
+                  <td data-row="6" data-col="3"></td>
+                  <td data-row="6" data-col="4"></td>
+                  <td data-row="6" data-col="5"></td>
+                  <td data-row="6" data-col="6"></td>
+                  <td data-row="6" data-col="7"></td>
+                  <td data-row="6" data-col="8"></td>
+               </tr>
+               <tr>
+                  <td data-row="7" data-col="0"></td>
+                  <td data-row="7" data-col="1"></td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3"></td>
+                  <td data-row="7" data-col="4"></td>
+                  <td data-row="7" data-col="5"></td>
+                  <td data-row="7" data-col="6"></td>
+                  <td data-row="7" data-col="7"></td>
+                  <td data-row="7" data-col="8"></td>
+               </tr>
+               <tr>
+                  <td data-row="8" data-col="0"></td>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2"></td>
+                  <td data-row="8" data-col="3"></td>
+                  <td data-row="8" data-col="4"></td>
+                  <td data-row="8" data-col="5"></td>
+                  <td data-row="8" data-col="6"></td>
+                  <td data-row="8" data-col="7"></td>
+                  <td data-row="8" data-col="8"></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <div id="board10x10" class="board-container">
+         <div class="container">
+            <div class="notation">
+               <div class="notation2">1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;10</div>
+               <div class="notation_letters">
+                  <div>A</div>
+                  <div>B</div>
+                  <div>C</div>
+                  <div>D</div>
+                  <div>E</div>
+                  <div>F</div>
+                  <div>G</div>
+                  <div>H</div>
+                  <div>I</div>
+                  <div>J</div>
+               </div>
+            </div>
+         </div>
+         <table>
+            <tbody>
+               <!-- 10x10 table rows -->
+               <tr>
+                  <td data-row="0" data-col="0"></td>
+                  <td data-row="0" data-col="1"></td>
+                  <td data-row="0" data-col="2"></td>
+                  <td data-row="0" data-col="3"></td>
+                  <td data-row="0" data-col="4"></td>
+                  <td data-row="0" data-col="5"></td>
+                  <td data-row="0" data-col="6"></td>
+                  <td data-row="0" data-col="7"></td>
+                  <td data-row="0" data-col="8"></td>
+                  <td data-row="0" data-col="9"></td>
+               </tr>
+               <tr>
+                  <td data-row="1" data-col="0"></td>
+                  <td data-row="1" data-col="1"></td>
+                  <td data-row="1" data-col="2"></td>
+                  <td data-row="1" data-col="3"></td>
+                  <td data-row="1" data-col="4"></td>
+                  <td data-row="1" data-col="5"></td>
+                  <td data-row="1" data-col="6"></td>
+                  <td data-row="1" data-col="7"></td>
+                  <td data-row="1" data-col="8"></td>
+                  <td data-row="1" data-col="9"></td>
+               </tr>
+               <tr>
+                  <td data-row="2" data-col="0"></td>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2"></td>
+                  <td data-row="2" data-col="3"></td>
+                  <td data-row="2" data-col="4"></td>
+                  <td data-row="2" data-col="5"></td>
+                  <td data-row="2" data-col="6"></td>
+                  <td data-row="2" data-col="7"></td>
+                  <td data-row="2" data-col="8"></td>
+                  <td data-row="2" data-col="9"></td>
+               </tr>
+               <tr>
+                  <td data-row="3" data-col="0"></td>
+                  <td data-row="3" data-col="1"></td>
+                  <td data-row="3" data-col="2"></td>
+                  <td data-row="3" data-col="3"></td>
+                  <td data-row="3" data-col="4"></td>
+                  <td data-row="3" data-col="5"></td>
+                  <td data-row="3" data-col="6"></td>
+                  <td data-row="3" data-col="7"></td>
+                  <td data-row="3" data-col="8"></td>
+                  <td data-row="3" data-col="9"></td>
+               </tr>
+               <tr>
+                  <td data-row="4" data-col="0"></td>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2"></td>
+                  <td data-row="4" data-col="3"></td>
+                  <td data-row="4" data-col="4"></td>
+                  <td data-row="4" data-col="5"></td>
+                  <td data-row="4" data-col="6"></td>
+                  <td data-row="4" data-col="7"></td>
+                  <td data-row="4" data-col="8"></td>
+                  <td data-row="4" data-col="9"></td>
+               </tr>
+               <tr>
+                  <td data-row="5" data-col="0"></td>
+                  <td data-row="5" data-col="1"></td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3"></td>
+                  <td data-row="5" data-col="4"></td>
+                  <td data-row="5" data-col="5"></td>
+                  <td data-row="5" data-col="6"></td>
+                  <td data-row="5" data-col="7"></td>
+                  <td data-row="5" data-col="8"></td>
+                  <td data-row="5" data-col="9"></td>
+               </tr>
+               <tr>
+                  <td data-row="6" data-col="0"></td>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2"></td>
+                  <td data-row="6" data-col="3"></td>
+                  <td data-row="6" data-col="4"></td>
+                  <td data-row="6" data-col="5"></td>
+                  <td data-row="6" data-col="6"></td>
+                  <td data-row="6" data-col="7"></td>
+                  <td data-row="6" data-col="8"></td>
+                  <td data-row="6" data-col="9"></td>
+               </tr>
+               <tr>
+                  <td data-row="7" data-col="0"></td>
+                  <td data-row="7" data-col="1"></td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3"></td>
+                  <td data-row="7" data-col="4"></td>
+                  <td data-row="7" data-col="5"></td>
+                  <td data-row="7" data-col="6"></td>
+                  <td data-row="7" data-col="7"></td>
+                  <td data-row="7" data-col="8"></td>
+                  <td data-row="7" data-col="9"></td>
+               </tr>
+               <tr>
+                  <td data-row="8" data-col="0"></td>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2"></td>
+                  <td data-row="8" data-col="3"></td>
+                  <td data-row="8" data-col="4"></td>
+                  <td data-row="8" data-col="5"></td>
+                  <td data-row="8" data-col="6"></td>
+                  <td data-row="8" data-col="7"></td>
+                  <td data-row="8" data-col="8"></td>
+                  <td data-row="8" data-col="9"></td>
+               </tr>
+               <tr>
+                  <td data-row="9" data-col="0"></td>
+                  <td data-row="9" data-col="1"></td>
+                  <td data-row="9" data-col="2"></td>
+                  <td data-row="9" data-col="3"></td>
+                  <td data-row="9" data-col="4"></td>
+                  <td data-row="9" data-col="5"></td>
+                  <td data-row="9" data-col="6"></td>
+                  <td data-row="9" data-col="7"></td>
+                  <td data-row="9" data-col="8"></td>
+                  <td data-row="9" data-col="9"></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <br>
+      <button onclick="undoMove()" disabled>Undo</button>
+      <button onclick="redoMove()" disabled>Redo</button>
+      <button id="resetButton">Reset</button>
+      <label for="boardSize">Size:</label>
+      <!--<select id="boardSize" onchange="switchBoardSize(this.value)">-->
+      <select id="boardSize">
+         <option value="3">3x3</option>
+         <option value="4">4x4</option>
+         <option value="5">5x5</option>
+         <option value="6">6x6</option>
+         <option value="7">7x7</option>
+         <option value="8">8x8</option>
+         <option value="9">9x9</option>
+         <option value="10" selected>10x10</option>
+      </select>
+      <label for="toWin">Win:</label>
+      <input type="number" id="toWin" value="5" min="3" max="10">
+      <!--<button onclick="submitToWin()">Submit</button>-->
+      <button onclick="switchBoardSize(document.getElementById('boardSize').value,document.getElementById('toWin').value);submitToWin()">Submit</button>
+      <br>
+      <button onclick="randomMove()" style="margin-top: 5px; margin-bottom: 10px;">Random Move</button>
+      <button onclick="aiMove(document.getElementById('depthSelector').value)" style="margin-top: 5px; margin-bottom: 10px;">AI Move</button>
+      <input type="range" id="depthSelector" min="1" max="15" value="1" oninput="updateDepthValue(this.value)">
+      <span id="depthValue">1</span>
+      <hr>
+      <p>&copy; Author: Daniel Šípek | <a href="">info</a>
+      </p>
+      <script>
+         let currentPlayer = 'X';
+         /*
+         let gameBoard = [
+             ['', '', '', '', '', '', '', '', '', ''],
+             ['', '', '', '', '', '', '', '', '', ''],
+             ['', '', '', '', '', '', '', '', '', ''],
+             ['', '', '', '', '', '', '', '', '', ''],
+             ['', '', '', '', '', '', '', '', '', ''],
+             ['', '', '', '', '', '', '', '', '', ''],
+             ['', '', '', '', '', '', '', '', '', ''],
+             ['', '', '', '', '', '', '', '', '', ''],
+             ['', '', '', '', '', '', '', '', '', ''],
+             ['', '', '', '', '', '', '', '', '', '']
+         ];*/
+         // Assuming boardSize is defined and contains a valid number
+         let toWin
+         let boardSize;
 
-        <label for="toWin">Win:</label>
-        <input type="number" id="toWin" value="5" min="3" max="10">
-		<!--<button onclick="submitToWin()">Submit</button>-->
-		<button onclick="switchBoardSize(document.getElementById('boardSize').value,document.getElementById('toWin').value);submitToWin()">Submit</button>
-
-	<br>
-	<button onclick="randomMove()" style="margin-top: 5px; margin-bottom: 10px;">Random Move</button>
-	<button onclick="aiMove(document.getElementById('depthSelector').value)" style="margin-top: 5px; margin-bottom: 10px;">AI Move</button>
-
-	<input type="range" id="depthSelector" min="1" max="15" value="1" oninput="updateDepthValue(this.value)">
-    <span id="depthValue">1</span>
-
-
-	<hr>
-	<p>&copy; Author: Daniel Šípek | <a href="">info</a></p>
-
-
-    <script>
-        let currentPlayer = 'X';
-        /*
-        let gameBoard = [
-            ['', '', '', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', '', '', '']
-        ];*/
-        // Assuming boardSize is defined and contains a valid number
-		let toWin
-		let boardSize;
-
-		
-
-		function checkLocal() {
-			// Get values from localStorage
-			toWin = parseInt(localStorage.getItem('toWin')) || 3; // Default value is 3
-			boardSize = parseInt(localStorage.getItem('boardSize')) || 3; // Default value is 3
-			
-			// Check and adjust toWin if it's greater than boardSize
-			if (toWin > boardSize) {
-				toWin = boardSize;
-			}
-
-			// Check and adjust boardSize if it's greater than 10
-			if (boardSize > 10) {
-				boardSize = 10;
-			}
-
-			// Update values in localStorage
-			localStorage.setItem('toWin', toWin);
-			localStorage.setItem('boardSize', boardSize);
-
-			// Return adjusted values
-			return { toWin, boardSize };
-		}
-
-		// Example usage:
-		const checkLocalResult = checkLocal();
-		//console.log("Adjusted toWin:", checkLocalResult.toWin);
-		//console.log("Adjusted boardSize:", checkLocalResult.boardSize);
-
-
-
-
-        let moveHistory = [];
-        let moveIndex = -1;
-        let redoHistory = [];
-
-		let boardSizeIndex = calcboardSizeIndex(boardSize);
-
-        //let toWin = 5;
-		//let boardSize = 10; // Default board size
-
-        // Load toWin and boardSize from localStorage
-        const savedToWin = localStorage.getItem('toWin');
-        const savedBoardSize = localStorage.getItem('boardSize');
-
-        // Check if the values exist in localStorage and are valid
-        if (savedToWin !== null && savedBoardSize !== null) {
+         function checkLocal() {
+            // Get values from localStorage
+            toWin = parseInt(localStorage.getItem('toWin')) || 3; // Default value is 3
+            boardSize = parseInt(localStorage.getItem('boardSize')) || 3; // Default value is 3
+            // Check and adjust toWin if it's greater than boardSize
+            if (toWin > boardSize) {
+               toWin = boardSize;
+            }
+            // Check and adjust boardSize if it's greater than 10
+            if (boardSize > 10) {
+               boardSize = 10;
+            }
+            // Update values in localStorage
+            localStorage.setItem('toWin', toWin);
+            localStorage.setItem('boardSize', boardSize);
+            // Return adjusted values
+            return {
+               toWin,
+               boardSize
+            };
+         }
+         // Example usage:
+         const checkLocalResult = checkLocal();
+         //console.log("Adjusted toWin:", checkLocalResult.toWin);
+         //console.log("Adjusted boardSize:", checkLocalResult.boardSize);
+         let moveHistory = [];
+         let moveIndex = -1;
+         let redoHistory = [];
+         let boardSizeIndex = calcboardSizeIndex(boardSize);
+         //let toWin = 5;
+         //let boardSize = 10; // Default board size
+         // Load toWin and boardSize from localStorage
+         const savedToWin = localStorage.getItem('toWin');
+         const savedBoardSize = localStorage.getItem('boardSize');
+         // Check if the values exist in localStorage and are valid
+         if (savedToWin !== null && savedBoardSize !== null) {
             // Convert the retrieved values to numbers
             toWin = parseInt(savedToWin, 10);
             boardSize = parseInt(savedBoardSize, 10);
-        } else {
+         } else {
             // Use default values if the values are not found in localStorage
             toWin = 5;
             boardSize = 10;
             // Save toWin and boardSize to localStorage
             localStorage.setItem('toWin', toWin.toString());
             localStorage.setItem('boardSize', boardSize.toString());
+         }
+         // Create an empty gameBoard based on the boardSize
+         let gameBoard = Array.from({
+            length: boardSize
+         }, () => Array(boardSize).fill(''));
+         const undoButton = document.querySelector('button:nth-of-type(1)');
+         const redoButton = document.querySelector('button:nth-of-type(2)');
+         let helperValue = 1;
 
-        }
-        // Create an empty gameBoard based on the boardSize
-        let gameBoard = Array.from({ length: boardSize }, () => Array(boardSize).fill(''));
-
-        const undoButton = document.querySelector('button:nth-of-type(1)');
-        const redoButton = document.querySelector('button:nth-of-type(2)');
-
-        let helperValue = 1;
-
-		function calcboardSizeIndex(boardSize) {
-			let sum = 0;
-			for(let i = 3; i < boardSize; i++) {
-				sum += i * i;
-			}
-			return sum;
-		}	
-
-
-        switchBoardSize(boardSize,toWin)
-        document.getElementById('boardSize').value = boardSize.toString();
-        document.getElementById('toWin').value = toWin.toString();
-        
-
-        let gameWon = false;
-
-        const table = document.getElementById('ticTacToe');
-        const cells = document.querySelectorAll('td');
-        const winnerDisplay = document.getElementById('winner');
-        
-        // Get the toWin input element
-        const toWinInput = document.getElementById('toWin');
-
-
-		// Function to update the displayed depth value when the depth selector changes
-		function updateDepthValue(value) {
-			document.getElementById('depthValue').textContent = value;
-		}
-		
-        cells.forEach(cell => {
+         function calcboardSizeIndex(boardSize) {
+            let sum = 0;
+            for (let i = 3; i < boardSize; i++) {
+               sum += i * i;
+            }
+            return sum;
+         }
+         switchBoardSize(boardSize, toWin)
+         document.getElementById('boardSize').value = boardSize.toString();
+         document.getElementById('toWin').value = toWin.toString();
+         let gameWon = false;
+         const table = document.getElementById('ticTacToe');
+         const cells = document.querySelectorAll('td');
+         const winnerDisplay = document.getElementById('winner');
+         // Get the toWin input element
+         const toWinInput = document.getElementById('toWin');
+         // Function to update the displayed depth value when the depth selector changes
+         function updateDepthValue(value) {
+            document.getElementById('depthValue').textContent = value;
+         }
+         cells.forEach(cell => {
             cell.addEventListener('click', () => makeMove(cell));
             cell.addEventListener('contextmenu', (e) => {
-                e.preventDefault();
-                if (e.ctrlKey) {
-                    toggleGreenHighlight(cell);
-                } else {
-                    toggleHighlight(cell);
-                }
+               e.preventDefault();
+               if (e.ctrlKey) {
+                  toggleGreenHighlight(cell);
+               } else {
+                  toggleHighlight(cell);
+               }
             });
-        });
+         });
 
+         function aiMove(depth) {
+            if (!gameWon) {
+               console.log("MOVE");
+               // AI MOVE
+            }
+         }
 
-		function aiMove(depth) {
-			if (!gameWon) {
-				console.log("MOVE");
-				// AI MOVE
-			}
-		}
+         function isBoardFull(board) {
+            // Check if all cells in the board are filled
+            return board.every(row => row.every(cell => cell !== ''));
+         }
 
-		function isBoardFull(board) {
-			// Check if all cells in the board are filled
-			return board.every(row => row.every(cell => cell !== ''));
-		}
+         function getAvailableMoves(board) {
+            const moves = [];
+            for (let row = 0; row < board.length; row++) {
+               for (let col = 0; col < board[row].length; col++) {
+                  if (board[row][col] === '') {
+                     moves.push({
+                        row,
+                        col
+                     });
+                  }
+               }
+            }
+            return moves;
+         }
 
-		function getAvailableMoves(board) {
-			const moves = [];
-			for (let row = 0; row < board.length; row++) {
-				for (let col = 0; col < board[row].length; col++) {
-					if (board[row][col] === '') {
-						moves.push({ row, col });
-					}
-				}
-			}
-			return moves;
-		}
+         function isCellEmpty(row, col) {
+            return gameBoard[row][col] === '';
+         }
 
-		
-		function isCellEmpty(row, col) {
-			return gameBoard[row][col] === '';
-		}
+         function randomMove() {
+            if (!gameWon) {
+               const emptyCells = [];
+               // Find all empty cells on the game board
+               for (let row = 0; row < gameBoard.length; row++) {
+                  for (let col = 0; col < gameBoard[row].length; col++) {
+                     if (gameBoard[row][col] === '') {
+                        emptyCells.push({
+                           row,
+                           col
+                        });
+                     }
+                  }
+               }
+               // If there are empty cells, randomly select one and make a move
+               if (emptyCells.length > 0) {
+                  const randomIndex = Math.floor(Math.random() * emptyCells.length);
+                  const {
+                     row,
+                     col
+                  } = emptyCells[randomIndex];
+                  console.log("N", row * boardSize + col + boardSizeIndex);
+                  makeMove(cells[row * boardSize + col + boardSizeIndex]);
+                  updateBoard();
+               }
+            }
+         }
+         // Get the reset button
+         const resetButton = document.getElementById('resetButton');
+         // Add event listener to the reset button
+         resetButton.addEventListener('click', function(event) {
+            // Check if the Ctrl key is pressed
+            if (event.ctrlKey) {
+               resetHighlights();
+            } else {
+               resetGame();
+            }
+         });
+         // Function to reset highlights
+         function resetHighlights() {
+            // Clear the cells in the HTML table
+            cells.forEach(cell => {
+               cell.classList.remove('highlight', 'green-highlight');
+            });
+         }
 
-		function randomMove() {
-			if (!gameWon) {
-				const emptyCells = [];
-				// Find all empty cells on the game board
-				for (let row = 0; row < gameBoard.length; row++) {
-					for (let col = 0; col < gameBoard[row].length; col++) {
-						if (gameBoard[row][col] === '') {
-							emptyCells.push({ row, col });
-						}
-					}
-				}
-
-				// If there are empty cells, randomly select one and make a move
-				if (emptyCells.length > 0) {
-					const randomIndex = Math.floor(Math.random() * emptyCells.length);
-					const { row, col } = emptyCells[randomIndex];
-					console.log("N",row * boardSize + col + boardSizeIndex);
-					makeMove(cells[row * boardSize + col + boardSizeIndex]);
-					updateBoard();
-				}
-			}
-		}
-
-
-		// Get the reset button
-		const resetButton = document.getElementById('resetButton');
-
-		// Add event listener to the reset button
-		resetButton.addEventListener('click', function(event) {
-			// Check if the Ctrl key is pressed
-			if (event.ctrlKey) {
-				resetHighlights();
-			} else {
-				resetGame();
-			}
-		});
-
-		// Function to reset highlights
-		function resetHighlights() {
-			// Clear the cells in the HTML table
-			cells.forEach(cell => {
-				cell.classList.remove('highlight', 'green-highlight');
-			});
-		}
-
-
-
-
-
-        function submitToWin() {
+         function submitToWin() {
             //const toWinInput = document.getElementById('toWin');
             const toWinValue = parseInt(toWinInput.value, 10);
-
-            
-
             if (toWinValue >= 3 && toWinValue <= 10 && toWinValue <= boardSize) {
-                toWin = toWinValue;
-                resetGame(); // Reset the game to apply the new 'toWin' value
-                // Save toWin and boardSize to localStorage
-                localStorage.setItem('toWin', toWin.toString());
-                localStorage.setItem('boardSize', boardSize.toString());
-                //console.log("ToWin:",toWin)
+               toWin = toWinValue;
+               resetGame(); // Reset the game to apply the new 'toWin' value
+               // Save toWin and boardSize to localStorage
+               localStorage.setItem('toWin', toWin.toString());
+               localStorage.setItem('boardSize', boardSize.toString());
+               //console.log("ToWin:",toWin)
             } else if (toWinValue > boardSize) {
-                alert("Please enter a 'toWin' value less than or equal to the board size.");
-                toWinInput.value = boardSize;
-                toWin = parseInt(boardSize, 10)
-;
-                localStorage.setItem('toWin', toWin.toString());
-                localStorage.setItem('boardSize', boardSize.toString());
+               alert("Please enter a 'toWin' value less than or equal to the board size.");
+               toWinInput.value = boardSize;
+               toWin = parseInt(boardSize, 10);
+               localStorage.setItem('toWin', toWin.toString());
+               localStorage.setItem('boardSize', boardSize.toString());
             } else {
-                alert("Please enter a valid value for 'toWin' between 3 and 10.");
-                toWinInput.value = boardSize;
-                toWin = parseInt(boardSize, 10)
-                localStorage.setItem('toWin', toWin.toString());
-                localStorage.setItem('boardSize', boardSize.toString());
+               alert("Please enter a valid value for 'toWin' between 3 and 10.");
+               toWinInput.value = boardSize;
+               toWin = parseInt(boardSize, 10)
+               localStorage.setItem('toWin', toWin.toString());
+               localStorage.setItem('boardSize', boardSize.toString());
             }
-			
-			//var newUrl = window.location.origin + window.location.pathname + '?board=' + encodeURIComponent(boardSize) + '&win=' + encodeURIComponent(toWin);
+            //var newUrl = window.location.origin + window.location.pathname + '?board=' + encodeURIComponent(boardSize) + '&win=' + encodeURIComponent(toWin);
+            //window.history.replaceState({}, document.title, newUrl);
+         }
+         // Function to switch between board sizes
+         /*function switchBoardSize(size) {
+             // Hide all board containers
+             const boardContainers = document.querySelectorAll('.board-container');
+             boardContainers.forEach(container => {
+                 container.style.display = 'none';
+             });
 
-			//window.history.replaceState({}, document.title, newUrl);
-        }
-		
-		// Function to switch between board sizes
-        /*function switchBoardSize(size) {
+             // Show the selected board container
+             const selectedBoardContainer = document.getElementById(`board${size}x${size}`);
+             if (selectedBoardContainer) {
+                 selectedBoardContainer.style.display = 'block';
+             }
+         }*/
+         // Function to switch between board sizes
+         function switchBoardSize(size, toWin) {
             // Hide all board containers
-            const boardContainers = document.querySelectorAll('.board-container');
-            boardContainers.forEach(container => {
-                container.style.display = 'none';
-            });
-
-            // Show the selected board container
-            const selectedBoardContainer = document.getElementById(`board${size}x${size}`);
-            if (selectedBoardContainer) {
-                selectedBoardContainer.style.display = 'block';
-            }
-        }*/
-		// Function to switch between board sizes
-		function switchBoardSize(size, toWin) {
-            // Hide all board containers
-
             /*/ Add a condition to check if toWin is greater than the board size
             if (parseInt(toWin, 10) > size) {
                     alert("Please enter a 'toWin' value less than or equal to the board size.");
@@ -1061,445 +1022,403 @@
             }*/
             const boardContainers = document.querySelectorAll('.board-container');
             boardContainers.forEach(container => {
-                container.style.display = 'none';
+               container.style.display = 'none';
             });
-
-            
-
             // Show the selected board container
             const selectedBoardContainer = document.getElementById(`board${size}x${size}`);
             if (selectedBoardContainer) {
-                selectedBoardContainer.style.display = 'block';
-
-                // Update gameBoard and moveHistory for the new board size
-                const rows = parseInt(size, 10);
-                const cols = parseInt(size, 10);
-
-                if(helperValue == 0) {
-                    // Change the value to 6 (you can set any desired value)
-                    toWinInput.value = size;
-                    toWin = parseInt(boardSize, 10)
-                   // console.log("ToWin:",toWin)
-                    helperValue = 1;    
-                }
-
-                //if(size < boardSize) { // new size vs. oldSize
-                //    console.log("ToWin:",toWin)
-                //    helperValue = 0;
-                //}
-
-                gameBoard = Array.from({ length: rows }, () => Array(cols).fill(''));
-                let cells = document.querySelectorAll('td');
-                moveHistory = [];
-                moveIndex = -1;
-                redoHistory = [];
-                boardSize = size;
-				boardSizeIndex = calcboardSizeIndex(boardSize)
-
-				//var newUrl = window.location.origin + window.location.pathname + '?board=' + encodeURIComponent(boardSize) + '&win=' + encodeURIComponent(toWin);
-
-				//window.history.replaceState({}, document.title, newUrl);
-
-                // Save toWin and boardSize to localStorage
-                localStorage.setItem('toWin', toWin.toString());
-                localStorage.setItem('boardSize', boardSize.toString());
-
-
-                updateBoard();
-                updateUndoRedoButtons();
+               selectedBoardContainer.style.display = 'block';
+               // Update gameBoard and moveHistory for the new board size
+               const rows = parseInt(size, 10);
+               const cols = parseInt(size, 10);
+               if (helperValue == 0) {
+                  // Change the value to 6 (you can set any desired value)
+                  toWinInput.value = size;
+                  toWin = parseInt(boardSize, 10)
+                  // console.log("ToWin:",toWin)
+                  helperValue = 1;
+               }
+               //if(size < boardSize) { // new size vs. oldSize
+               //    console.log("ToWin:",toWin)
+               //    helperValue = 0;
+               //}
+               gameBoard = Array.from({
+                  length: rows
+               }, () => Array(cols).fill(''));
+               let cells = document.querySelectorAll('td');
+               moveHistory = [];
+               moveIndex = -1;
+               redoHistory = [];
+               boardSize = size;
+               boardSizeIndex = calcboardSizeIndex(boardSize)
+               //var newUrl = window.location.origin + window.location.pathname + '?board=' + encodeURIComponent(boardSize) + '&win=' + encodeURIComponent(toWin);
+               //window.history.replaceState({}, document.title, newUrl);
+               // Save toWin and boardSize to localStorage
+               localStorage.setItem('toWin', toWin.toString());
+               localStorage.setItem('boardSize', boardSize.toString());
+               updateBoard();
+               updateUndoRedoButtons();
             }
-        }
+         }
 
-        function makeMove(cell) {
+         function makeMove(cell) {
             if (gameWon) {
-                return;
+               return;
             }
-			console.log(cell)
+            console.log(cell)
             const row = cell.getAttribute('data-row');
             const col = cell.getAttribute('data-col');
-
             if (!gameBoard[row][col]) {
-
-                redoHistory = [];
-
-                moveHistory = moveHistory.slice(0, moveIndex + 1);
-
-                moveHistory.push({
-                    board: JSON.parse(JSON.stringify(gameBoard)),
-                    move: { row, col },
-                    player: currentPlayer
-                });
-                moveIndex++;
-
-                gameBoard[row][col] = currentPlayer;
-                cell.textContent = currentPlayer;
-                cell.classList.add(currentPlayer === 'X' ? 'red' : 'blue');
-                checkWin(row, col);
-                currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
-
-                console.log(`Move: ${convertToChessNotation(col, row)}`);
-                updateUndoRedoButtons();
+               redoHistory = [];
+               moveHistory = moveHistory.slice(0, moveIndex + 1);
+               moveHistory.push({
+                  board: JSON.parse(JSON.stringify(gameBoard)),
+                  move: {
+                     row,
+                     col
+                  },
+                  player: currentPlayer
+               });
+               moveIndex++;
+               gameBoard[row][col] = currentPlayer;
+               cell.textContent = currentPlayer;
+               cell.classList.add(currentPlayer === 'X' ? 'red' : 'blue');
+               checkWin(row, col);
+               currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+               console.log(`Move: ${convertToChessNotation(col, row)}`);
+               updateUndoRedoButtons();
             }
-        }
+         }
 
-
-
-
-        function convertToChessNotation(col, row) {
+         function convertToChessNotation(col, row) {
             const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
             const rows = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
             return columns[row] + rows[col];
-        }
+         }
 
-		function undoMove() {
-			if (moveIndex >= 0) {
-				const { board, move, player } = moveHistory[moveIndex];
-				//console.log('Before Undo:', JSON.stringify(gameBoard)); // Add this line for debugging
-				gameBoard = JSON.parse(JSON.stringify(board));
-				//console.log('After Undo:', JSON.stringify(gameBoard)); // Add this line for debugging
-				updateBoard();
-				moveIndex--;
+         function undoMove() {
+            if (moveIndex >= 0) {
+               const {
+                  board,
+                  move,
+                  player
+               } = moveHistory[moveIndex];
+               //console.log('Before Undo:', JSON.stringify(gameBoard)); // Add this line for debugging
+               gameBoard = JSON.parse(JSON.stringify(board));
+               //console.log('After Undo:', JSON.stringify(gameBoard)); // Add this line for debugging
+               updateBoard();
+               moveIndex--;
+               console.log(`Undo: ${player} at ${convertToChessNotation(move.col, move.row)}`);
+               currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+               redoHistory.push({
+                  move,
+                  player
+               });
+               updateUndoRedoButtons();
+               winnerDisplay.textContent = '';
+               winnerDisplay.style.color = '';
+               gameWon = false;
+            }
+         }
 
-				console.log(`Undo: ${player} at ${convertToChessNotation(move.col, move.row)}`);
+         function redoMove2() {
+            if (redoHistory.length > 0) {
+               const {
+                  move,
+                  player
+               } = redoHistory.pop();
+               gameBoard[move.row][move.col] = player;
+               moveHistory.push({
+                  board: JSON.parse(JSON.stringify(gameBoard)),
+                  move: {
+                     row: move.row,
+                     col: move.col
+                  },
+                  player: player
+               });
+               moveIndex++;
+               currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+               updateBoard();
+               checkWin(move.row, move.col);
+               updateUndoRedoButtons();
+               console.log(`Redo: ${player} at ${convertToChessNotation(move.col, move.row)}`);
+            }
+         }
 
-				currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
-				redoHistory.push({ move, player });
-				updateUndoRedoButtons();
+         function redoMove() {
+            if (redoHistory.length > 0) {
+               const {
+                  move,
+                  player
+               } = redoHistory.pop();
+               gameBoard[move.row][move.col] = player;
+               moveHistory.push({
+                  board: JSON.parse(JSON.stringify(gameBoard)),
+                  move: {
+                     row: move.row,
+                     col: move.col
+                  },
+                  player: player
+               });
+               moveIndex++;
+               currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+               updateBoard(); // Update the board
+               // Check for a win condition using solidCheckWin
+               const isWin = solidCheckWin();
+               if (isWin) {
+                  //console.log(`Win detected after redo.`);
+                  winnerDisplay.textContent = ` ${player} wins!`;
+                  winnerDisplay.style.color = (player === 'X') ? 'red' : 'blue';
+                  gameWon = true;
+               }
+               updateUndoRedoButtons();
+               console.log(`Redo: ${player} at ${convertToChessNotation(move.col, move.row)}`);
+            }
+         }
+         // Function to check if a solid line contains a winning combination
+         function solidCheckWin() {
+            // Check rows
+            for (let row = 0; row < gameBoard.length; row++) {
+               if (checkLine2(gameBoard[row])) {
+                  return true;
+               }
+            }
+            // Check columns
+            for (let col = 0; col < gameBoard[0].length; col++) {
+               const column = [];
+               for (let row = 0; row < gameBoard.length; row++) {
+                  column.push(gameBoard[row][col]);
+               }
+               if (checkLine2(column)) {
+                  return true;
+               }
+            }
+            // Check diagonals
+            for (let i = 0; i <= gameBoard.length - toWin; i++) {
+               for (let j = 0; j <= gameBoard[i].length - toWin; j++) {
+                  const diagonal = [];
+                  const antiDiagonal = [];
+                  for (let k = 0; k < toWin; k++) {
+                     diagonal.push(gameBoard[i + k][j + k]);
+                     antiDiagonal.push(gameBoard[i + k][gameBoard.length - 1 - (j + k)]);
+                  }
+                  if (checkLine2(diagonal) || checkLine2(antiDiagonal)) {
+                     return true;
+                  }
+               }
+            }
+            return false;
+         }
+         // Function to check if a line contains a winning combination
+         function checkLine2(line) {
+            // Check each subset of 'toWin' consecutive cells in the line
+            for (let i = 0; i <= line.length - toWin; i++) {
+               let count = 0;
+               let currentCell = line[i];
+               // Count consecutive cells with the same value
+               for (let j = 0; j < toWin; j++) {
+                  if (line[i + j] === currentCell && currentCell !== '') {
+                     count++;
+                  } else {
+                     break;
+                  }
+               }
+               // If 'toWin' consecutive cells have the same value and are not empty, it's a winning line
+               if (count === toWin) {
+                  return true;
+               }
+            }
+            return false;
+         }
 
-				winnerDisplay.textContent = '';
-				winnerDisplay.style.color = '';
-				gameWon = false;
-			}
-		}
+         function consoleBoard(gameBoard) {
+            for (let row = 0; row < gameBoard.length; row++) {
+               for (let col = 0; col < gameBoard[row].length; col++) {
+                  //console.log(gameBoard[row,col]);
+               }
+            }
+         }
 
-
-		function redoMove2() {
-		  if (redoHistory.length > 0) {
-			const { move, player } = redoHistory.pop();
-			gameBoard[move.row][move.col] = player;
-			moveHistory.push({
-			  board: JSON.parse(JSON.stringify(gameBoard)),
-			  move: { row: move.row, col: move.col },
-			  player: player
-			});
-			moveIndex++;
-			currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
-			updateBoard();
-			checkWin(move.row, move.col);
-			
-			updateUndoRedoButtons();
-			
-
-			console.log(`Redo: ${player} at ${convertToChessNotation(move.col, move.row)}`);
-		  }
-		}
-
-		function redoMove() {
-			if (redoHistory.length > 0) {
-				const { move, player } = redoHistory.pop();
-				gameBoard[move.row][move.col] = player;
-				moveHistory.push({
-					board: JSON.parse(JSON.stringify(gameBoard)),
-					move: { row: move.row, col: move.col },
-					player: player
-				});
-				moveIndex++;
-				currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
-				updateBoard(); // Update the board
-				
-				// Check for a win condition using solidCheckWin
-				const isWin = solidCheckWin();
-				if (isWin) {
-					//console.log(`Win detected after redo.`);
-					winnerDisplay.textContent = ` ${player} wins!`;
-					winnerDisplay.style.color = (player === 'X') ? 'red' : 'blue';
-					gameWon = true;
-				}
-
-				updateUndoRedoButtons();
-
-				console.log(`Redo: ${player} at ${convertToChessNotation(move.col, move.row)}`);
-			}
-		}
-
-
-
-		// Function to check if a solid line contains a winning combination
-		function solidCheckWin() {
-			// Check rows
-			for (let row = 0; row < gameBoard.length; row++) {
-				if (checkLine2(gameBoard[row])) {
-					return true;
-				}
-			}
-
-			// Check columns
-			for (let col = 0; col < gameBoard[0].length; col++) {
-				const column = [];
-				for (let row = 0; row < gameBoard.length; row++) {
-					column.push(gameBoard[row][col]);
-				}
-				if (checkLine2(column)) {
-					return true;
-				}
-			}
-
-			// Check diagonals
-			for (let i = 0; i <= gameBoard.length - toWin; i++) {
-				for (let j = 0; j <= gameBoard[i].length - toWin; j++) {
-					const diagonal = [];
-					const antiDiagonal = [];
-					for (let k = 0; k < toWin; k++) {
-						diagonal.push(gameBoard[i + k][j + k]);
-						antiDiagonal.push(gameBoard[i + k][gameBoard.length - 1 - (j + k)]);
-					}
-					if (checkLine2(diagonal) || checkLine2(antiDiagonal)) {
-						return true;
-					}
-				}
-			}
-
-			return false;
-		}
-
-		// Function to check if a line contains a winning combination
-		function checkLine2(line) {
-			// Check each subset of 'toWin' consecutive cells in the line
-			for (let i = 0; i <= line.length - toWin; i++) {
-				let count = 0;
-				let currentCell = line[i];
-				// Count consecutive cells with the same value
-				for (let j = 0; j < toWin; j++) {
-					if (line[i + j] === currentCell && currentCell !== '') {
-						count++;
-					} else {
-						break;
-					}
-				}
-				// If 'toWin' consecutive cells have the same value and are not empty, it's a winning line
-				if (count === toWin) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-
-
-
-
-
-
-
-		function consoleBoard(gameBoard) {
-			for (let row = 0; row < gameBoard.length; row++) {
-				for (let col = 0; col < gameBoard[row].length; col++) {
-					//console.log(gameBoard[row,col]);
-				}
-			}
-		}
-        
-		function updateBoard(callback) {
+         function updateBoard(callback) {
             const selectedBoardSize = document.getElementById(`board${boardSize}x${boardSize}`);
             const cells = selectedBoardSize.querySelectorAll('td');
-
-           //console.log("CELLS:",cells);
-           //console.log("selectedBoardSize:",selectedBoardSize);
-           
-
+            //console.log("CELLS:",cells);
+            //console.log("selectedBoardSize:",selectedBoardSize);
             cells.forEach((cell, index) => {
-                const row = Math.floor(index / boardSize);
-                const col = index % boardSize;
-
-                // Check if gameBoard[row] is defined before accessing gameBoard[row][col]
-                if (gameBoard && gameBoard[row] && typeof gameBoard[row][col] !== 'undefined') {
-                    cell.textContent = gameBoard[row][col] || ''; // Use empty string if the value is falsy
-                    cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
-
-                    if (gameBoard[row][col] === 'X' || gameBoard[row][col] === 'O') {
-                        cell.classList.add(gameBoard[row][col] === 'X' ? 'red' : 'blue');
-                    }
-                } else {
-                    // If the cell is not defined, clear its content and remove any classes
-                    cell.textContent = '';
-                    cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
-                }
+               const row = Math.floor(index / boardSize);
+               const col = index % boardSize;
+               // Check if gameBoard[row] is defined before accessing gameBoard[row][col]
+               if (gameBoard && gameBoard[row] && typeof gameBoard[row][col] !== 'undefined') {
+                  cell.textContent = gameBoard[row][col] || ''; // Use empty string if the value is falsy
+                  cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
+                  if (gameBoard[row][col] === 'X' || gameBoard[row][col] === 'O') {
+                     cell.classList.add(gameBoard[row][col] === 'X' ? 'red' : 'blue');
+                  }
+               } else {
+                  // If the cell is not defined, clear its content and remove any classes
+                  cell.textContent = '';
+                  cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
+               }
             });
-
             // Ensure that the callback is a function before calling it
             if (typeof callback === 'function') {
-                callback();
+               callback();
             }
-        }
+         }
 
+         function fixBoard() {
+            const selectedBoardSize = document.getElementById(`board${boardSize}x${boardSize}`);
+            const cells = selectedBoardSize.querySelectorAll('td');
+            for (let row = 0; row < gameBoard.length; row++) {
+               for (let col = 0; col < gameBoard[row].length; col++) {
+                  const index = row * boardSize + col;
+                  const cell = cells[index];
+                  if (!cell) {
+                     console.error(`Cell at index ${index} is not defined.`);
+                     continue;
+                  }
+                  // Check if gameBoard[row] is defined before accessing gameBoard[row][col]
+                  if (gameBoard && gameBoard[row] && typeof gameBoard[row][col] !== 'undefined') {
+                     cell.textContent = gameBoard[row][col] || ''; // Use empty string if the value is falsy
+                     cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
+                     if (gameBoard[row][col] === 'X' || gameBoard[row][col] === 'O') {
+                        cell.classList.add(gameBoard[row][col] === 'X' ? 'red' : 'blue');
+                     }
+                  } else {
+                     // If the cell is not defined, clear its content and remove any classes
+                     cell.textContent = '';
+                     cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
+                  }
+               }
+            }
+         }
 
-
-		function fixBoard() {
-			const selectedBoardSize = document.getElementById(`board${boardSize}x${boardSize}`);
-			const cells = selectedBoardSize.querySelectorAll('td');
-
-			for (let row = 0; row < gameBoard.length; row++) {
-				for (let col = 0; col < gameBoard[row].length; col++) {
-					const index = row * boardSize + col;
-					const cell = cells[index];
-
-					if (!cell) {
-						console.error(`Cell at index ${index} is not defined.`);
-						continue;
-					}
-
-					// Check if gameBoard[row] is defined before accessing gameBoard[row][col]
-					if (gameBoard && gameBoard[row] && typeof gameBoard[row][col] !== 'undefined') {
-						cell.textContent = gameBoard[row][col] || ''; // Use empty string if the value is falsy
-						cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
-
-						if (gameBoard[row][col] === 'X' || gameBoard[row][col] === 'O') {
-							cell.classList.add(gameBoard[row][col] === 'X' ? 'red' : 'blue');
-						}
-					} else {
-						// If the cell is not defined, clear its content and remove any classes
-						cell.textContent = '';
-						cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
-					}
-				}
-			}
-		}
-
-        function checkWin(row, col) {
-            if (
-                checkRow(row) ||
-                checkColumn(col) ||
-                checkDiagonal() ||
-                checkAntiDiagonal()
-            ) {
-                winnerDisplay.textContent = ` ${currentPlayer} wins!`;
-                winnerDisplay.style.color = (currentPlayer === 'X') ? 'red' : 'blue';
-                gameWon = true;
-				console.log("WIN", row, col);
+         function checkWin(row, col) {
+            if (checkRow(row) || checkColumn(col) || checkDiagonal() || checkAntiDiagonal()) {
+               winnerDisplay.textContent = ` ${currentPlayer} wins!`;
+               winnerDisplay.style.color = (currentPlayer === 'X') ? 'red' : 'blue';
+               gameWon = true;
+               console.log("WIN", row, col);
             } else if (isBoardFull()) {
-                winnerDisplay.textContent = " It's a draw!";
-                winnerDisplay.style.color = 'green';
-                gameWon = true;
-				console.log("WIN", row, col);
+               winnerDisplay.textContent = " It's a draw!";
+               winnerDisplay.style.color = 'green';
+               gameWon = true;
+               console.log("WIN", row, col);
             }
-        }
+         }
 
-        function checkRow(row) {
+         function checkRow(row) {
             return checkLine(gameBoard[row]);
-        }
+         }
 
-        function checkColumn(col) {
+         function checkColumn(col) {
             const column = [];
             for (let i = 0; i < gameBoard.length; i++) {
-                column.push(gameBoard[i][col]);
+               column.push(gameBoard[i][col]);
             }
             return checkLine(column);
-        }
+         }
 
-        function checkDiagonal() {
+         function checkDiagonal() {
             for (let i = 0; i < gameBoard.length; i++) {
-                for (let j = 0; j < gameBoard[i].length; j++) {
-                    const diagonal = [];
-                    for (let k = 0; k < toWin; k++) {
-                        if (i + k < gameBoard.length && j + k < gameBoard[i].length) {
-                            diagonal.push(gameBoard[i + k][j + k]);
-                        }
-                    }
-                    if (checkLine(diagonal)) {
-                        return true;
-                    }
-                }
+               for (let j = 0; j < gameBoard[i].length; j++) {
+                  const diagonal = [];
+                  for (let k = 0; k < toWin; k++) {
+                     if (i + k < gameBoard.length && j + k < gameBoard[i].length) {
+                        diagonal.push(gameBoard[i + k][j + k]);
+                     }
+                  }
+                  if (checkLine(diagonal)) {
+                     return true;
+                  }
+               }
             }
             return false;
-        }
+         }
 
-        function checkAntiDiagonal() {
+         function checkAntiDiagonal() {
             for (let i = 0; i < gameBoard.length; i++) {
-                for (let j = 0; j < gameBoard[i].length; j++) {
-                    const antiDiagonal = [];
-                    for (let k = 0; k < toWin; k++) {
-                        if (i + k < gameBoard.length && j - k >= 0) {
-                            antiDiagonal.push(gameBoard[i + k][j - k]);
-                        }
-                    }
-                    if (checkLine(antiDiagonal)) {
-                        return true;
-                    }
-                }
+               for (let j = 0; j < gameBoard[i].length; j++) {
+                  const antiDiagonal = [];
+                  for (let k = 0; k < toWin; k++) {
+                     if (i + k < gameBoard.length && j - k >= 0) {
+                        antiDiagonal.push(gameBoard[i + k][j - k]);
+                     }
+                  }
+                  if (checkLine(antiDiagonal)) {
+                     return true;
+                  }
+               }
             }
             return false;
-        }
+         }
 
-        function checkLine(line) {
+         function checkLine(line) {
             let count = 0;
             for (const cell of line) {
-                if (cell === currentPlayer) {
-                    count++;
-                    if (count === toWin) {
-                        return true;
-                    }
-                } else {
-                    count = 0;
-                }
+               if (cell === currentPlayer) {
+                  count++;
+                  if (count === toWin) {
+                     return true;
+                  }
+               } else {
+                  count = 0;
+               }
             }
             return false;
-        }
+         }
 
-        function isBoardFull() {
+         function isBoardFull() {
             return gameBoard.every(row => row.every(cell => cell !== ''));
-        }
+         }
 
-        function resetGame() {
-			// Get the selected board size
-			const selectedSize = parseInt(document.getElementById('boardSize').value, 10);
+         function resetGame() {
+            // Get the selected board size
+            const selectedSize = parseInt(document.getElementById('boardSize').value, 10);
+            // Initialize the gameBoard array based on the selected size
+            gameBoard = Array.from({
+               length: selectedSize
+            }, () => Array(selectedSize).fill(''));
+            // Clear the cells in the HTML table
+            cells.forEach(cell => {
+               cell.textContent = '';
+               cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
+            });
+            // Reset other game-related variables
+            winnerDisplay.textContent = '';
+            winnerDisplay.style.color = '';
+            currentPlayer = 'X';
+            moveHistory = [];
+            moveIndex = -1;
+            redoHistory = [];
+            updateUndoRedoButtons();
+            gameWon = false;
+         }
 
-			// Initialize the gameBoard array based on the selected size
-			gameBoard = Array.from({ length: selectedSize }, () => Array(selectedSize).fill(''));
+         function toggleHighlight(cell) {
+            // If the cell has 'highlight' class, remove it. Otherwise, add it.
+            if (cell.classList.contains('highlight')) {
+               cell.classList.remove('highlight');
+            } else {
+               cell.classList.remove('green-highlight'); // Ensure only one highlight class is active
+               cell.classList.add('highlight');
+            }
+         }
 
-			// Clear the cells in the HTML table
-			cells.forEach(cell => {
-				cell.textContent = '';
-				cell.classList.remove('highlight', 'green-highlight', 'red', 'blue');
-			});
+         function toggleGreenHighlight(cell) {
+            // If the cell has 'green-highlight' class, remove it. Otherwise, add it.
+            if (cell.classList.contains('green-highlight')) {
+               cell.classList.remove('green-highlight');
+            } else {
+               cell.classList.remove('highlight'); // Ensure only one highlight class is active
+               cell.classList.add('green-highlight');
+            }
+         }
 
-			// Reset other game-related variables
-			winnerDisplay.textContent = '';
-			winnerDisplay.style.color = '';
-			currentPlayer = 'X';
-			moveHistory = [];
-			moveIndex = -1;
-			redoHistory = [];
-			updateUndoRedoButtons();
-			gameWon = false;
-		}
-
-        function toggleHighlight(cell) {
-			// If the cell has 'highlight' class, remove it. Otherwise, add it.
-			if (cell.classList.contains('highlight')) {
-				cell.classList.remove('highlight');
-			} else {
-				cell.classList.remove('green-highlight'); // Ensure only one highlight class is active
-				cell.classList.add('highlight');
-			}
-		}
-
-		function toggleGreenHighlight(cell) {
-			// If the cell has 'green-highlight' class, remove it. Otherwise, add it.
-			if (cell.classList.contains('green-highlight')) {
-				cell.classList.remove('green-highlight');
-			} else {
-				cell.classList.remove('highlight'); // Ensure only one highlight class is active
-				cell.classList.add('green-highlight');
-			}
-		}
-
-
-        function updateUndoRedoButtons() {
-            undoButton.disabled = moveIndex < 0;// || gameWon;
-            redoButton.disabled = redoHistory.length === 0;// || gameWon;
-        }	
-    </script>
-
-</body>
-
+         function updateUndoRedoButtons() {
+            undoButton.disabled = moveIndex < 0; // || gameWon;
+            redoButton.disabled = redoHistory.length === 0; // || gameWon;
+         }
+      </script>
+   </body>
 </html>
